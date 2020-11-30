@@ -3,6 +3,8 @@
 # include <iomanip>
 # include <iostream>
 # include <mpi.h>
+// sleep
+#include <unistd.h>
 
 using namespace std;
 
@@ -24,9 +26,9 @@ int main ( int argc, char *argv[] )
 
   if ( ierr != 0 )
   {
-    cout << "\n";
-    cout << "HELLO_MPI - Fatal error!\n";
-    cout << "  MPI_Init returned nonzero ierr.\n";
+    cout << endl;
+    cout << "HELLO_MPI - Fatal error!" << endl;
+    cout << "  MPI_Init returned nonzero ierr." << endl;
     exit ( 1 );
   }
 //
@@ -40,31 +42,32 @@ int main ( int argc, char *argv[] )
 //
 //  Process 0 prints an introductory message.
 //
-  if ( id == 0 ) 
+  if ( id == 0 )
   {
-    cout << "\n";
-    cout << "P" << id << ":  HELLO_MPI - Master process:\n";
-    cout << "P" << id << ":    C++/MPI version\n";
-    cout << "P" << id << ":    An MPI example program.\n";
-    cout << "\n";
-    cout << "P" << id << ":    The number of processes is " << p << "\n";
-    cout << "\n";
+    cout << "" << endl;
+    cout << "P" << id << ":  HELLO_MPI - Master process:" << endl;
+    cout << "P" << id << ":    C++/MPI version" << endl;
+    cout << "P" << id << ":    An MPI example program." << endl;
+    cout << "" << endl;
+    cout << "P" << id << ":    The number of processes is " << p << "" << endl;
+    cout << "" << endl;
   }
 //
 //  Every process prints a hello.
 //
-  if ( id == 0 ) 
+  if ( id == 0 )
   {
-    wtime = MPI_Wtime ( );
+    wtime = MPI_Wtime ( ); // Returns an elapsed time on the calling processor
   }
-  cout << "P" << id << ":    'Hello, world!'\n";
+  cout << "P" << id << ":    'Hello, world!'" << endl;
+  usleep(3000000); // 1000000 microseconds = 1 second
 //
 //  Process 0 says goodbye.
 //
   if ( id == 0 )
   {
     wtime = MPI_Wtime ( ) - wtime;
-    cout << "P" << id << ":    Elapsed wall clock time = " << wtime << " seconds.\n";
+    cout << "P" << id << ":    Elapsed wall clock time = " << wtime << " seconds." << endl;
   }
 //
 //  Terminate MPI.
@@ -75,10 +78,10 @@ int main ( int argc, char *argv[] )
 //
   if ( id == 0 )
   {
-    cout << "\n";
-    cout << "P" << id << ":  HELLO_MPI:\n";
-    cout << "P" << id << ":    Normal end of execution.\n";
-    cout << "\n";
+    cout << "" << endl;
+    cout << "P" << id << ":  HELLO_MPI:" << endl;
+    cout << "P" << id << ":    Normal end of execution." << endl;
+    cout << "" << endl;
 //    timestamp ( );
   }
   return 0;
