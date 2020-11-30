@@ -10,6 +10,7 @@ RUN apt-get update && \
 # text editing
                vim \
                build-essential \
+               time \
                mpich \
 #               libopenmpi-dev \
   && rm -rf /var/lib/apt/lists/*
